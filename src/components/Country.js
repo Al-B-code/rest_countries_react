@@ -1,36 +1,47 @@
-const Country = ({ country }) => { // should be a prop deconstructed here to get the country info.
-    // console.log(country.name.common) // returns undefined?
-    console.log(country.languages)
+const Country = ({ country, onToggleVisited, onToggleDetails, showDetails }) => {
+
+    console.log(country);
+
+    if (!country) {
+      return null; // Handle the case where country is not available
+    }
+
+    const { name, capital, languages } = country;
 
     const renderLanguages = () => {
-        const languages = country.languages;
+    if (!languages || typeof languages !== "object") {
+        return null;
+    }
 
-        if (!languages || typeof languages !== "object") {
-            return null;
-        }
-
-        return ( 
-            <>
-            <h4>Languages:</h4>
-            <ul>
-                {Object.values(languages).map((language, index) => (
-                    <li key={index}>{`${language}`}</li>
-                ))}
-            </ul>
+    return (
+        <>
+        <h4>Languages:</h4>
+        <ul>
+            {Object.values(languages).map((language, index) => (
+            <li key={index}>{`${language}`}</li>
+            ))}
+        </ul>
         </>
+    );
+    };
+
+    return (
+    <>
+        <h3>Country Name: {name?.common}</h3>
+        <h4>Capital(s): {capital}</h4>
+        <button onClick={() => onToggleVisited(country)}>Toggle Visited</button>
+        <button onClick={() => onToggleDetails(name?.common)}>Toggle Details</button>
+        {showDetails && (
+        <div>
+            <h4>Additional Details:</h4>
+            <p>Area: {country.area} square kilometers</p>
+            <p>Population: {country.population}</p>
+          {/* Add more details as needed */}
+        </div>
+        )}
+        {renderLanguages()}
+    </>
     );
 };
-
-
-
-    return ( 
-        <>
-            <h3>Country Name: {country.name.common}</h3>
-            <h4>Capital(s): {country.capital} </h4>
-            {renderLanguages()}
-
-        </>
-    );
-}
 
 export default Country;

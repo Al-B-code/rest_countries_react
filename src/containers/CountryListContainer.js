@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 
 const CountryListContainer = () => {
 
-    const [countries, setCountries] = useState([]);   // not sure if i actually need to assign the countries to a variable. 
+    const [countries, setCountries] = useState([]);   
     const [visitedCountries, setVisitedCountries] = useState([]);
+    const [countryDetails, setCountryDetails] = useState({});
 
     const loadAllCountries = async () => {
         const response = await fetch("https://restcountries.com/v3.1/all");
@@ -20,12 +21,15 @@ const CountryListContainer = () => {
 
 
     const handleToggleVisited = (country) => {
-        const countryName = country.name.common;
+        console.log(country);
+        console.log("sdfsdf" + country + "sdfsdfsd")
+        
         // check if the countryName is valid
-        if (!countryName) {
-            console.error("Invalid country data", countryName);
+        if (!country || !country.name) {
+            console.error("Invalid country data", country);
             return;
-        }
+            }
+        const countryName = country.name.common;
     
         if (visitedCountries.some((visitedCountry) => visitedCountry.name.common === countryName)) {
             // Remove from visited countries
@@ -44,7 +48,14 @@ const CountryListContainer = () => {
             }
         }
         
-    
+        
+        const handleToggleDetails = (countryName) => {
+            setCountryDetails((previousDetails) => {
+                return {...previousDetails,
+                    [countryName]: !previousDetails[countryName], 
+            }})
+        }
+
 
 
     return ( 
@@ -53,12 +64,16 @@ const CountryListContainer = () => {
             <section className="countries">
                 <CountryList 
                 countries={countries}
-                onToggleVisited={handleToggleVisited}/>
+                onToggleVisited={handleToggleVisited}
+                onToggleDetails={handleToggleDetails}
+                countryDetails={countryDetails}/>
             </section>
             <section className="visitedCountries">
                 <VisitedCountryList 
                 visitedCountries={visitedCountries}
-                onToggleVisited={handleToggleVisited}/>
+                onToggleVisited={handleToggleVisited}
+                onToggleDetails={handleToggleDetails}
+                countryDetails={countryDetails}/>
             </section>
         </section>
         </>

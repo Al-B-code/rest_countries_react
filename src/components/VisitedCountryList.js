@@ -1,15 +1,20 @@
 import React from "react";
 import Country from "./Country";
 
-const VisitedCountryList = ({ visitedCountries, onToggleVisited }) => {
+const VisitedCountryList = ({ visitedCountries, onToggleVisited, onToggleDetails, countryDetails}) => {
 const visitedCountriesMapped =
     visitedCountries && visitedCountries.length > 0
     ? visitedCountries.map((country, index) => {
         return (
-            <div key={index}>
-            <Country country={country} />
-            <button onClick={() => onToggleVisited(country)}>Toggle Visited</button>
-            </div>
+        <div>
+            <Country key={index} 
+            country={country}
+            onToggleVisited={onToggleVisited}
+            onToggleDetails={onToggleDetails}
+            showDetails={countryDetails[
+            country.name.common
+            ]}/>
+        </div>
         );
         })
     : "No visited countries yet";
