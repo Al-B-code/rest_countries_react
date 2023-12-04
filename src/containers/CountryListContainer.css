@@ -1,0 +1,22 @@
+
+
+.sectionBoth {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.visitedCountries {
+    background-color: aqua;
+
+}
+
+.countries {
+    background-color: pink;
+
+}
+
+li {
+    list-style-type: none;
+}
+
