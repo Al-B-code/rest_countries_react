@@ -20,9 +20,9 @@ const Country = ({ country }) => { // should be a prop deconstructed here to get
         </>
     );
 };
-    
 
-  
+
+
     return ( 
         <>
             <h3>Country Name: {country.name.common}</h3>
@@ -30,7 +30,7 @@ const Country = ({ country }) => { // should be a prop deconstructed here to get
             {renderLanguages()}
 
         </>
-     );
+    );
 }
- 
+
 export default Country;

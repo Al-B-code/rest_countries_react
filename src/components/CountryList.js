@@ -1,13 +1,15 @@
 import Country from "./Country";
 
-const CountryList = ({countries}) => {
+const CountryList = ({countries, onToggleVisited }) => {
 
-
-
-    
 
     const countriesMapped = countries 
-    ? countries.map((country, index) => <Country key={index} country={country}/>) 
+    ? countries.map((country, index) =>
+    <div>
+        <Country key={index} country={country}/>
+        <button onClick={() => onToggleVisited(country)}>Toggle Visited</button>
+    </div>
+    ) 
     : "not loaded yet";
 
 
@@ -16,9 +18,9 @@ const CountryList = ({countries}) => {
         <h2>Countries</h2>
         {countriesMapped}
         </>
-     );
+    );
 }
- 
+
 export default CountryList;
 
 
