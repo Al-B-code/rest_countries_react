@@ -1,7 +1,7 @@
 import Country from "./Country";
 
 const CountryList = ({countries, onToggleVisited, onToggleDetails, countryDetails }) => {
-
+    // const countriesToDisplay = countries || [];
 
     const countriesMapped = countries 
     ? countries.map((country, index) =>
@@ -12,7 +12,8 @@ const CountryList = ({countries, onToggleVisited, onToggleDetails, countryDetail
         onToggleDetails={onToggleDetails}
         showDetails={countryDetails[
         country.name.common
-        ]}/>
+        ]}
+        className="country-container"/>
     </div>
     ) 
     : "not loaded yet";
@@ -21,6 +22,7 @@ const CountryList = ({countries, onToggleVisited, onToggleDetails, countryDetail
     return ( 
         <>
         <h2>Countries</h2>
+
         {countriesMapped}
         </>
     );

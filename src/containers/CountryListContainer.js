@@ -1,5 +1,6 @@
 import CountryList from "../components/CountryList";
 import VisitedCountryList from "../components/VisitedCountryList";
+import CountrySearchForm from "../components/CountrySearchForm";
 import { useEffect, useState } from "react";
 
 const CountryListContainer = () => {
@@ -7,6 +8,7 @@ const CountryListContainer = () => {
     const [countries, setCountries] = useState([]);   
     const [visitedCountries, setVisitedCountries] = useState([]);
     const [countryDetails, setCountryDetails] = useState({});
+    const [filteredCountries, setFilteredCountries] = useState([]);
 
     const loadAllCountries = async () => {
         const response = await fetch("https://restcountries.com/v3.1/all");
@@ -21,8 +23,6 @@ const CountryListContainer = () => {
 
 
     const handleToggleVisited = (country) => {
-        console.log(country);
-        console.log("sdfsdf" + country + "sdfsdfsd")
         
         // check if the countryName is valid
         if (!country || !country.name) {
@@ -46,6 +46,8 @@ const CountryListContainer = () => {
             // Add to visitedCountries
             setVisitedCountries((previousVisitedState) => [...previousVisitedState, country]);
             }
+        const updatedFilteredCountries = filteredCountries.filter((filteredCountry) => filteredCountry.name.common !== countryName);
+        setFilteredCountries(updatedFilteredCountries);    
         }
         
         
@@ -56,14 +58,25 @@ const CountryListContainer = () => {
             }})
         }
 
+        const handleSearch = (searchTerm) => {
+            const filteredCountries = countries.filter(
+                (country) =>
+                    country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+                setFilteredCountries(filteredCountries);
+        }
+
 
 
     return ( 
         <>
+        <section className="searchForm">
+            <CountrySearchForm onSearch={handleSearch} />
+        </section>
         <section className="sectionBoth"> 
             <section className="countries">
                 <CountryList 
-                countries={countries}
+                countries={filteredCountries.length > 0 ? filteredCountries : countries}
                 onToggleVisited={handleToggleVisited}
                 onToggleDetails={handleToggleDetails}
                 countryDetails={countryDetails}/>

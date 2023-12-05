@@ -40,6 +40,7 @@ const Country = ({ country, onToggleVisited, onToggleDetails, showDetails }) => 
         </div>
         )}
         {renderLanguages()}
+
     </>
     );
 };

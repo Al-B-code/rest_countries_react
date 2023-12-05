@@ -1,4 +1,23 @@
+body {
+    display: flex;
+    justify-content:space-around;
+}
 
+.country-container {
+    background-color: blue;
+}
+
+h1 {
+    margin-top: 5vh;
+    background-color:aliceblue;
+    display: flex;
+    justify-content: center;
+}
+
+.searchForm {
+    text-align: center;
+    background-color: aliceblue;
+}
 
 .sectionBoth {
     display: flex;

@@ -13,7 +13,8 @@ const visitedCountriesMapped =
             onToggleDetails={onToggleDetails}
             showDetails={countryDetails[
             country.name.common
-            ]}/>
+            ]}
+            className="country-container"/>
         </div>
         );
         })
@@ -22,6 +23,7 @@ const visitedCountriesMapped =
 return (
     <>
     <h2>Visited Countries</h2>
+
     {visitedCountriesMapped}
     </>
     );
